@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %}
+Acacia Food
+{% endblock %}
+
+
+{% block content %}
+ 
+
+	<section class="food_section layout_padding-bottom pt-5">
+		<div class="container">
+			<div class="heading_container heading_center">
+				<h2 class="text-secondary">Our Products</h2>
+			</div>
+
+<!-- Category filter menu -->
+<ul class="filters_menu">
+    <li class="active" data-filter="*">All</li>
+    {% for c in category %}
+    <li data-filter=".{{ c.id }}-cap">{{ c.title }}</li>
+    {% endfor %}
+</ul>
+
+<!-- Product display -->
+<div class="filters-content">
+    <div class="row grid">
+        {% for c in category %}
+        {% for p in c.category.all %}
+        <div class="col-sm-6 col-lg-4 all {{ c.id }}-cap">
+            <div class="box">
+                <div>
+                    <!-- Product image -->
+                    <div class="col-12" style="border-radius: 0px 0px 0px 40px;background-color: #f3f3f3;">
+                        <img class="col-12" src="{{ p.thumb.url }}" alt=""/>
+                    </div>
+                    <!-- Product details -->
+                    <div class="detail-box">
+                        <h5>{{ p.title }}</h5>
+                        <p>{{ p.snip }}</p>
+                        <!-- Options (e.g., a link) -->
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+ 
+		</div>
+	</section>  
+
+	<!-- end food section -->
+
+	<!-- about section -->
+
+ 
+
+
+	{% for product in category %}
+		{% if product.id|divisibleby:2 %}
+		<section class="about_sectio layout_padding my-5 pt-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 ">
+						<div class="">
+							<img style="width: 100%;"
+								src="{{product.thumb.url}}"
+								alt=""
+							/>
+						</div>
+					</div>
+					<div class="col-md-6 my-auto">
+						<div class="detail-box">
+							<div class="heading_container my-4">
+								<h2 class="text-secondary">{{product.title}}</h2>
+							</div>
+							<p class="">
+								{{product.body}}
+							</p>
+							<a class="btn btn-outline-success rounded-pill " href="{{product.get_absolute_url}}"> View More </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		{% else %}
+		<section class="about_sectio layout_padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6  my-auto">
+						<div class="detail-bo ">
+							<div class="heading_container my-4">
+								<h2 class="text-secondary"> {{product.title}} </h2>
+							</div>
+							<p>
+								{{product.body}}
+							</p>
+							<a class="btn btn-outline-success rounded-pill " href="{{product.get_absolute_url}}"> View More </a>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="img-bo">
+							<img
+							style="width: 100%;"
+								src="{{product.thumb.url}}"
+								alt=""
+							/>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+		</section>
+		{% endif %}
+	{% endfor %}
+
+
+ 
+ 
+
+{% endblock %}
+ 
+ 
