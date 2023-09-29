@@ -84,14 +84,13 @@
 				<div id="carouselExampleFade" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
 					<div class="carousel-inner">
 					  <div class="carousel-item active">
-						<img src="{% static 'images/Yess_GoFresh_1700x900.png' %}" class="d-block w-100" alt="...">
+						<img src="{% static 'images/Yess_GoFresh_1700x900.png'  %}" class="d-block w-100" alt="..."> 
 					  </div>
 					  <div class="carousel-item">
 						<img src="{% static 'images/YESS_Soda_1700x900.png' %}" class="d-block w-100" alt="...">
 					  </div>
 					  <div class="carousel-item">
 						<img src="{% static 'images/YESS_Water_1700x900.png' %}" class="d-block w-100" alt="...">
-
 					  </div>
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -129,7 +128,7 @@
 								</a>
 								<ul class="dropdown-menu drop">
 									{% for c in category %}
-									<li><a class="dropdown-item dropdown" href="{{c.get_absolute_url}}" style="z-index: 5;">{{c.title}}</a></li>
+									<li class="droptext"><a href="{{c.get_absolute_url}}" style="z-index: 5;width: 100%;">{{c.title}}</a></li>
 									{% endfor %}
 									<!-- <div class="dropdown-overlay"></div> -->
 								</ul>
@@ -157,39 +156,45 @@
 									color: #fff;
 
 								}
-								.dropdown-item:hover{
+								.droptext:hover {
 									color: #fff;
 									background-image: url("{% static 'images/bg.png' %}");
-									width: 100%;
 									background-position: center center;
-									height: 40px;
+									/* height: 40px; */
+									
 									background-size: 100%  100%;
 									background-repeat: no-repeat;
 									background-color: transparent;
 								}
-								.dropdown {
+								/* .dropdown {
 								position: relative;
-								}
-								.dropdown-item{
-									font-weight: bold;
-									font-size: larger;
-									color:#fff ;
+								} */
+								.droptext{
+									width: 100%;
 									
+									/* background-color: black; */
+									text-align: center;
+									margin-bottom: 10px;
 								}
-
+								.droptext a{
+									text-decoration: none;font-size: larger;
+									font-weight: bold;
+									color:#fff ;
+								}
 								.drop {
 									display: none;
 									top: 100%;
 									left: 0;
-									width: 170px;
-									height: 680px;
+									width: 190px;
+									height: 720px;
 									background-color: transparent;
 									background-image: url("{% static 'images/yes_bg.png' %}");
-									position: relative; /* Ensure relative positioning for the overlay */
+									background-repeat: no-repeat;
+									background-position: center center;
+									background-size: 100% auto;
+									position: absolute; /* Ensure relative positioning for the overlay */
 									border:0px;
 									flex-direction: column; 
-									background-repeat: no-repeat;
-
 								}
 					
 								.dropdown:hover .drop {
