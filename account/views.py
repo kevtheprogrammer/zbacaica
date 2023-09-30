@@ -4,7 +4,7 @@ import json
 from django.views.generic import ListView , DetailView ,TemplateView
 # from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .models import Category
+from .models import Category, Product
 from .forms import ReviewForm
  
 class HomeView(TemplateView):
@@ -50,4 +50,17 @@ class CatDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["category"] = Category.objects.all()
+        return context 
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'detail.html'
+   
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context["cat"] = Category.objects.filter(id=self.object.categpry.id)
+        context["category"] = Category.objects.all()
+        
         return context 

@@ -102,6 +102,9 @@ class Product(models.Model):
     class Meta: 
         ordering = ('-stamp',) 
 
+    def get_absolute_url(self):
+        return reverse('products:detail', args=[self.slug,self.pk])
+
 class Review(models.Model): 
     name    = models.CharField(max_length=80) 
     email   = models.EmailField() 

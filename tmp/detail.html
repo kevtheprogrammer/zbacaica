@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ object }}
+{% endblock  %}
+
+{% block content %}
+<section class="food_section layout_padding my-5 pt-5">
+    <div class="container">
+        <!-- Category filter menu -->
+        <div class="heading_container heading_center">
+            <h2 class="text-secondary">{{ object.title }}</h2>
+        </div>
+        <ul class="filters_menu">
+            {% for c in cat %}
+                {% for p in c.category.all %}
+                    <li class="{% if p.id == object.id %}active {% endif%}" > <a class="{% if p.id == object.id %}text-light {% else%}text-dark  {% endif%}" href="{{ p.get_absolute_url }}">{{  p.title }}</a></li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        
+        <!-- Product display -->
+        <div class="filters-content">
+            <div class="row grid">
+                <section class="about_sectio layout_padding">
+                    <div class="container">
+                        <div class="row {{  p.id }}">
+                            <div class="col-md-6  my-auto">
+                                <div class="detail-bo ">
+                                    <div class="heading_container my-4">
+                                        <h2 class="text-secondary"> {{object.title}} </h2>
+                                    </div>
+                                    <p>
+                                        {{object.body}}
+                                    </p>         
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="img-bo">
+                                    <img
+                                    style="width: 100%;"
+                                        src="{{object.thumb.url}}"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Initially, show all objects
+        $(".product").show();
+
+        // Filter products when a category is clicked
+        $(".filters_menu li").on("click", function() {
+            var categoryId = $(this).data("filter");
+
+            // Hide all products
+            $(".product").hide();
+
+            // Show products of the selected category
+            $(".product[data-category='" + categoryId + "']").show();
+        });
+    });
+</script>
+{% endblock %}
