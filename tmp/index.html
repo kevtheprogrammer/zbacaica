@@ -2,10 +2,35 @@
 {% block title %}
 Acacia Food
 {% endblock %}
+{% load static %}
+
 
 
 {% block content %}
- 
+	{% include 'slide.html' %}
+    <div class="d-block d-md-none">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/Yess_GoFresh_1700x900.png'  %}" class="d-block w-100" alt="..."> 
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/YESS_Soda_1700x900.png' %}" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/YESS_Water_1700x900.png' %}" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </div>
 
 	<section class="food_section layout_padding-bottom pt-5">
 		<div class="container">
@@ -28,19 +53,21 @@ Acacia Food
 				{% for p in c.category.all %}
 				<div class="col-sm-6 col-lg-4 all {{ c.id }}-cap">
 					<div class="box">
-						<div>
-							<!-- Product image -->
-							<div class="col-12" style="border-radius: 0px 0px 0px 40px;background-color: #f3f3f3;">
-								<img class="col-12" src="{{ p.thumb.url }}" alt=""/>
+						<a class="text-light" href="{{p.get_absolute_url}}">
+							<div>
+								<!-- Product image -->
+								<div class="col-12" style="border-radius: 0px 0px 0px 40px;background-color: #f3f3f3;">
+									<img class="col-12" src="{{ p.thumb.url }}" alt=""/>
+								</div>
+								<!-- Product details -->
+								<div class="detail-box">
+									<h5>{{ p.title }}</h5>
+									<p>{{ p.snip }}</p>
+									<!-- Options (e.g., a link) -->
+								
+								</div>
 							</div>
-							<!-- Product details -->
-							<div class="detail-box">
-								<h5>{{ p.title }}</h5>
-								<p>{{ p.snip }}</p>
-								<!-- Options (e.g., a link) -->
-							
-							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 				{% endfor %}
